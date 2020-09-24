@@ -6,9 +6,9 @@ subroutine dot(C, A, B, dim)
     complex, dimension(dim,dim) :: C 
     integer :: i,j,k
     C = 0
-    do i = 1,2
-        do j = 1,2
-            do k = 1,2
+    do i = 1,dim
+        do j = 1,dim
+            do k = 1,dim
                 C(i,j) = C(i,j) + A(i,k) * B(k,j)
             end do
         end do
