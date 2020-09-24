@@ -1,5 +1,5 @@
 # Open-Quantum-Dynamics
-Fortran software for solving open quantum system dynamics using the repeated interactions picture. 
+Fortran code for solving open quantum system dynamics using the repeated interactions picture. 
 
 This repository contains subroutines that simulate the evolution of a finite dimensional quantum system 
 coupled to a heat reservoir. The system's reduced dynamics are studies within the framework of repeated 
