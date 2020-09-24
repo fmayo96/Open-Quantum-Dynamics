@@ -1,13 +1,15 @@
 program test
     complex, dimension(2,2) :: state, hamiltonian, bath_state, bath_hamiltonian
     complex, dimension(4,4) :: interaction
-    integer :: N = 10000
     real :: tf, dt, h, eps, beta
-    real, dimension(1000) :: E, W, Q     
+    integer :: N 
+    real, dimension(:), allocatable :: E, W, Q     
+    dt = 0.001
     tf = 10
-    dt = 0.01
     N = int(tf/dt)
-    
+    allocate(E(N))
+    allocate(Q(N))
+    allocate(W(N))
     h = 1.5
     eps = 0.5**0.5
     beta = 1
@@ -37,13 +39,11 @@ subroutine Open_evolution(state, hamiltonian, bath_state, bath_hamiltonian, inte
     Q = 0
     E = 0
     W = 0
+    open(1, file = 'test.txt', status = 'new')
     do i = 1, N-1 
         call RK4_open(state, hamiltonian, bath_state, interaction, dt, dim)
-        do j = 1,2
-            print *, state(j,:)
-        end do
-        call Energy(E(i), state, hamiltonian)
-        call Heat(Q, state, hamiltonian, bath_state, bath_hamiltonian)
-        call Work(W, E, Q)
+        write (1,*) Real(state(1,1)), Real(state(2,2))
+        
     end do
+    close(1)
 end subroutine Open_evolution
