@@ -46,9 +46,9 @@ subroutine trace(tr, A, dim)
 end subroutine trace
 
 subroutine partial_trace(C, A, dim, sys)
-    !Partial trace. Dimension of both subsystems 
+    !Partial trace. Dimension of both subsistems 
     !must be equal. sys = 0 (1) means the trace is
-    !taken with respect to second (first) system
+    !taken with respect to first (second) system
     integer :: dim, i, j, k, sys
     complex, dimension(dim**2, dim**2) :: A 
     complex, dimension(dim, dim) :: C
