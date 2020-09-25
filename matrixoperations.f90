@@ -38,10 +38,10 @@ subroutine trace(tr, A, dim)
     !Trace of a (square) matrix 
     integer :: dim, i 
     complex, dimension(dim,dim) :: A 
-    complex, intent(inout):: tr 
+    real :: tr 
     tr = 0
     do i = 1,dim
-        tr = tr + A(i,i)
+        tr = tr + real(A(i,i))
     end do
 end subroutine trace
 
@@ -74,7 +74,7 @@ end subroutine partial_trace
 
 subroutine commutator(C, A, B, dim)
     !Commutator of to matrices
-    integer :: dim, i
+    integer :: dim
     complex, dimension(dim,dim) :: A, B, C, D
     C = 0
     D = 0

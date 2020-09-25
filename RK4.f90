@@ -1,5 +1,5 @@
 subroutine RK4_open(state, hamiltonian, bath_state, interaction, dt, dim)
-    integer :: i, dim
+    integer :: dim
     real :: dt
     complex, dimension(dim,dim) :: prop, diss, state, aux_state, K1, K2, K3, K4
     complex, dimension(dim,dim) :: hamiltonian, bath_state, interaction
@@ -22,7 +22,7 @@ subroutine RK4_open(state, hamiltonian, bath_state, interaction, dt, dim)
 end subroutine RK4_open
 
 subroutine RK4_closed(state, hamiltonian, dt, dim)
-    integer :: i, dim
+    integer :: dim
     real :: dt
     complex, dimension(dim,dim) :: prop, state, aux_state
     complex, dimension(dim,dim) :: hamiltonian, K1, K2, K3, K4

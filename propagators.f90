@@ -1,5 +1,5 @@
 subroutine Dissipator(diss, state, bath_state, interaction, dim)
-    integer :: dim, i
+    integer :: dim
     complex, dimension(dim,dim) :: diss, state, bath_state 
     complex, dimension(dim**2, dim**2) :: interaction, rho, comm_v_rho, double_comm
     call kron(rho, state, bath_state, dim)

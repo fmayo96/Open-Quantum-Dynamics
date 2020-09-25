@@ -1,7 +1,7 @@
 .PHONY: default help objects executable all clean
 
 FC = gfortran
-
+FLAGS = -g -fcheck=all -Wall 
 SOURCE_F90 = $(wildcard *.f90)
 OBJECTS_F90 = $(patsubst %.f90, %.o, $(SOURCE_F90))
 EXECUTABLE = main.out 
@@ -21,9 +21,9 @@ Options:\n\n\
   make help:          display this help"
 
 %.o: %.f90 
-	$(FC) -c -o $@ $^
+	$(FC) $(FF) -c -o $@ $^
 
 $(EXECUTABLE): $(OBJECTS_F90)
-	$(FC) -o $@ $^
+	$(FC) $(FF) -o $@ $^
 clean:
 	rm $(OBJECTS_F90) $(EXECUTABLE)

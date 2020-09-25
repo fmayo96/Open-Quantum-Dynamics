@@ -5,11 +5,11 @@ program test
     real :: tf, dt, h, eps, beta
     integer :: N 
     dt = 0.001
-    tf = 10
+    tf = 10.0
     N = int(tf/dt)
     h = 1.5
     eps = 0.5**0.5
-    beta = 1
+    beta = 1.0
     bath_state = 0
     state = 0
     bath_state(1,1) = exp(-beta*h/2.0)/(2.0*cosh(beta*h/2.0))
@@ -36,16 +36,15 @@ subroutine Open_evolution(state, hamiltonian, bath_state, bath_hamiltonian, inte
     Q = 0
     E = 0
     W = 0
-    
-    !open(1, file = 'test_E.txt', status = 'new')
-    do i = 1, N - 1
+    open(1, file = 'test_E.txt', status = 'new')
+    do i = 1, N-1
         call RK4_open(state, hamiltonian, bath_state, interaction, dt, dim)
-    !    write (1,*) Real(state(1,1)), Real(state(2,2))
-        call Energy(E(i), state, hamiltonian, 2)
-        call Heat(delta_Q, state, bath_state, bath_hamiltonian, interaction, 2)     
+        !write (1,*) Real(state(1,1)), Real(state(2,2))
+        call Energy(E(i), state, hamiltonian, dim)
+        call Heat(delta_Q, state, bath_state, bath_hamiltonian, interaction, dim)     
         Q(i + 1) = Q(i) + 0.5 * dt * delta_Q
-        !write (1,*) E(i), Q(i)
-        print *, Q(i)
+        call Work(W(i), E(i), Q(i))
+        write (1,*) E(i), Q(i), W(i)        
     end do
-    !close(1)
+    close(1)
 end subroutine Open_evolution

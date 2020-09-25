@@ -8,10 +8,12 @@ end subroutine Energy
 
 subroutine Heat(delta_Q, state, bath_state, bath_hamiltonian, interaction, dim)
     integer :: dim 
-    complex, dimension(dim,dim) :: state, bath_state, bath_hamiltonian, eye
+    complex, dimension(dim,dim), intent(in) :: state, bath_state, bath_hamiltonian
+    complex, dimension(dim,dim) :: eye
     complex, dimension(dim**2, dim**2) :: interaction, prod_state, prod_hamiltonian
     complex, dimension(dim**2, dim**2) :: comm, double_comm, dot_product_state_double_comm
-    real :: delta_Q
+    real, intent(inout) :: delta_Q
+    delta_Q = 0 
     eye(1,1) = 1
     eye(1,2) = 0
     eye(2,1) = 0
@@ -22,7 +24,6 @@ subroutine Heat(delta_Q, state, bath_state, bath_hamiltonian, interaction, dim)
     call commutator(double_comm, interaction, comm, dim**2)
     call dot(dot_product_state_double_comm, prod_state, double_comm, dim**2)
     call trace(delta_Q, dot_product_state_double_comm, dim**2)
-
 end subroutine Heat 
 
 subroutine Work(W, E, Q)
