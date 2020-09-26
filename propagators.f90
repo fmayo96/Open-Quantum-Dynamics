@@ -21,5 +21,5 @@ subroutine Unitary(prop, state, hamiltonian, dim)
     integer :: dim 
     complex, dimension(dim,dim) :: prop, state, hamiltonian
     call commutator(prop, hamiltonian, state, dim)
-    prop = prop * complex(0,-1)
+        prop = prop * complex(0,-1)
 end subroutine Unitary 
