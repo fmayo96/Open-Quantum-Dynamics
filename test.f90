@@ -20,10 +20,6 @@ program test
     beta = 1.0
     bath_state = 0
     state = 0
-    bath_state(1,1) = exp(-beta*h/2.0)/(2.0*cosh(beta*h/2.0))
-    bath_state(2,2) = exp(beta*h/2.0)/(2.0*cosh(beta*h/2.0))
-    state(1,1) = exp(-beta*h/2.0)/(2.0*cosh(beta*h/2.0))
-    state(2,2) = exp(beta*h/2.0)/(2.0*cosh(beta*h/2.0))
     hamiltonian = 0
     hamiltonian(1,1,1) = h/2.0
     hamiltonian(1,2,2) = -h/2.0
@@ -41,6 +37,8 @@ program test
     interaction = 0
     interaction(1,4) = eps
     interaction(4,1) = eps
+    call Thermal_state(bath_state, beta, bath_hamiltonian, 2)
+    call Thermal_state(state, beta, hamiltonian(1,:,:), 2)
     call Driven_evolution(state, hamiltonian, bath_state, bath_hamiltonian, interaction, N, dt, 2, E, Q, W)
     open(1, file = 'test_E.txt', status = 'new')
     do i = 1, N-1
